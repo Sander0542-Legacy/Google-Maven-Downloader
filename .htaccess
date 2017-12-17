@@ -1,0 +1,10 @@
+# Start the rewrite engine
+RewriteEngine On
+RewriteBase /
+
+# Disable Indexing
+Options -Indexes
+
+# Remove PHP Extension
+RewriteCond %{REQUEST_FILENAME}\.php -f [NC]
+RewriteRule ^(.+?)/?$ $1.php
