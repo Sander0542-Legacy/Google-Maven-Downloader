@@ -91,7 +91,7 @@ if (isset($_GET["group"]) && isset($_GET["lib"]) && isset($_GET["version"])) {
                   <div'; if ($AARExists) { echo ' onclick="window.location.href=\''.$onclickURL.'\'"'; }  echo ' class=" col l3 clickable">
                     <div class="card hoverable grey lighten-4">
                       <div class="card-content center">
-                        <h5>'.$dependency->artifactId.'</h5>
+                        <h5>'.$dependency->artifactId.' ('.strtoupper($dependency->type).')</h5>
                       </div>
                     </div>
                   </div>';
