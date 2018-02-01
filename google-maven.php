@@ -89,7 +89,7 @@ if (isset($_GET["group"]) && isset($_GET["lib"]) && isset($_GET["version"])) {
           $onclickURL = '/google-maven?group='.$groupIndex.'&lib='.$dependency->artifactId.'&version='.$dependency->version;
           echo '
                   <div'; if ($AARExists) { echo ' onclick="window.location.href=\''.$onclickURL.'\'"'; }  echo ' class=" col l3 clickable">
-                    <div class="card hoverable grey lighten-1">
+                    <div class="card hoverable grey lighten-4">
                       <div class="card-content center">
                         <h5 class="white-text">'.$dependency->artifactId.'</h5>
                       </div>
