@@ -41,36 +41,69 @@ if (isset($_GET["group"]) && isset($_GET["lib"]) && isset($_GET["version"])) {
   $POMExists = @fopen($downloadPOM, "r");
 
   echo '
-          <ul class="collapsible" data-collapsible="accordion">
+          <ul class="collapsible" data-collapsible="expandable">
             <li>
               <div class="collapsible-header active"><i class="material-icons">filter_drama</i>'.$libIndex.'<span class="new badge blue" data-badge-caption="">'.$versionIndex.'</span></div>
-                <div class="collapsible-body">
-                  <div class="row">
-                    <div'; if ($AARExists) { echo ' onclick="window.location.href=\''.$downloadAAR.'\'"'; }  echo ' class="col l4'; if ($AARExists) { echo ' clickable'; } echo '">
-                      <div class="card hoverable '; if ($AARExists) { echo 'green'; } else { echo 'red'; } echo ' lighten-1">
-                        <div class="card-content center">
-                          <h5 class="white-text">Download AAR</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div'; if ($JARExists) { echo ' onclick="window.location.href=\''.$downloadJAR.'\'"'; }  echo ' class="col l4'; if ($JARExists) { echo ' clickable'; } echo '">
-                      <div class="card hoverable '; if ($JARExists) { echo 'green'; } else { echo 'red'; } echo ' lighten-1">
-                        <div class="card-content center">
-                          <h5 class="white-text">Download JAR</h5>
-                        </div>
-                      </div>
-                    </div>
-                    <div'; if ($POMExists) { echo ' onclick="window.location.href=\''.$downloadPOM.'\'"'; }  echo ' class="col l4'; if ($POMExists) { echo ' clickable'; } echo '">
-                      <div class="card hoverable '; if ($POMExists) { echo 'green'; } else { echo 'red'; } echo ' lighten-1">
-                        <div class="card-content center">
-                          <h5 class="white-text">Download POM</h5>
-                        </div>
+              <div class="collapsible-body">
+                <div class="row">
+
+                  <div'; if ($AARExists) { echo ' onclick="window.location.href=\''.$downloadAAR.'\'"'; }  echo ' class="col l4'; if ($AARExists) { echo ' clickable'; } echo '">
+                    <div class="card hoverable '; if ($AARExists) { echo 'green'; } else { echo 'red'; } echo ' lighten-1">
+                      <div class="card-content center">
+                        <h5 class="white-text">Download AAR</h5>
                       </div>
                     </div>
                   </div>
+                  <div'; if ($JARExists) { echo ' onclick="window.location.href=\''.$downloadJAR.'\'"'; }  echo ' class="col l4'; if ($JARExists) { echo ' clickable'; } echo '">
+                    <div class="card hoverable '; if ($JARExists) { echo 'green'; } else { echo 'red'; } echo ' lighten-1">
+                      <div class="card-content center">
+                        <h5 class="white-text">Download JAR</h5>
+                      </div>
+                    </div>
+                  </div>
+                  <div'; if ($POMExists) { echo ' onclick="window.location.href=\''.$downloadPOM.'\'"'; }  echo ' class="col l4'; if ($POMExists) { echo ' clickable'; } echo '">
+                    <div class="card hoverable '; if ($POMExists) { echo 'green'; } else { echo 'red'; } echo ' lighten-1">
+                      <div class="card-content center">
+                        <h5 class="white-text">Download POM</h5>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
-            </li>
+            </li>';
+
+  if ($POMExists) {
+
+    $xml = simplexml_load_file($downloadPOM);
+
+    foreach($xml as $tag) {
+      if ($tag->getName() == "dependencies") {
+        echo '
+            <li>
+              <div class="collapsible-header active"><i class="material-icons">filter_drama</i>POM Dependencies</div>
+              <div class="collapsible-body">
+                <div class="row">';
+        foreach($tag as $dependency) {
+          $groupIndex = str_replace(".","/",$dependency->groupId);
+          $onclickURL = '/google-maven?group='.$groupIndex.'&lib='.$dependency->artifactId.'&version='.$dependency->version;
+          echo '
+                  <div'; if ($AARExists) { echo ' onclick="window.location.href=\''.$onclickURL.'\'"'; }  echo ' class=" col l3 clickable">
+                    <div class="card hoverable grey lighten-1">
+                      <div class="card-content center">
+                        <h5 class="white-text">'.$dependency->artifactId.'</h5>
+                      </div>
+                    </div>
+                  </div>';
+        }
+        echo '
+              </div>
+            </li>';
+      }
+    }
+  }
+
+  echo '
           </ul>';
 
 } elseif (isset($_GET["group"]) && isset($_GET["lib"])) {
