@@ -2,9 +2,6 @@
 RewriteEngine On
 RewriteBase /
 
-# Enable URL Fopen
-php_value allow_url_fopen On
-
 # Disable Indexing
 Options -Indexes
 
