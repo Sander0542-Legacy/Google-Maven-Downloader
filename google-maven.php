@@ -179,6 +179,7 @@ if (isset($_GET["group"]) && isset($_GET["lib"]) && isset($_GET["version"])) {
 
   $masterIndex = $master."/master-index.xml";
   $xmlMaster = simplexml_load_file($masterIndex);
+  asort($xmlMaster);
 
   echo '
           <ul class="collapsible" data-collapsible="accordion">';
