@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="/assets/style/materialize-0.100.2/materialize.min.css"/>
     <link rel="stylesheet" type="text/css" href="/assets/style/materialicons/material-icons.css"/>
 
-    <script async src="/assets/style/materialize-0.100.2/materialize.min.js"></script>
-    <script async src="/assets/style/jquery-3.2.1/jquery.min.js"></script>
+    <script src="/assets/style/jquery-3.2.1/jquery.min.js"></script>
+    <script src="/assets/style/materialize-0.100.2/materialize.min.js"></script>
   </head>
   <body style="grey lighten-1">
     <div class="container">
